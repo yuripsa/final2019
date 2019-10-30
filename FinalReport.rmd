@@ -2,7 +2,10 @@
 title: "Aides Drug"
 author: "Put your name here!"
 date: "put the date here"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    number_sections: true
 ---
 
 ```{r include=FALSE,echo=FALSE}
@@ -17,11 +20,37 @@ avast <-read.csv(file="avastivironal.csv",header=TRUE)
 
 A new  preventative aides (abacavirinol) is under test in clinical trials. Analyze the effectiveness of this drug across the board. Consider population subgroups by gender, drug use, and sexual orientation. Finish this!
 
+# All
+
+Is the vaccine effective?  
+$H_0$: the vaccine has no effect on whether one contracts aids or not  
+$H_1$: the vaccine affects whether one contracts aids or not  
+  
+
+```{r}
+barchartGC( ~ infected+treatment, type='percent', horizontal = TRUE, data=avast)
+```
+
+The barchart shows...
+
+```{r}
+tab = xtabs(~infected+treatment, data=avast)
+print(tab)
+```
+
+the numberical summary shows..
+
+```{r}
+chisqtestGC(~infected+treatment, data=avast)
+```
+
+The p-value for the chi-squared test was ...  
+
 # Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method. Discuss what data manipulations may be needed for example subsetting or other binning procedures and what sort of graphical displays and inferential tools will be used!-->
 
-#Results
+# Results
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
 
